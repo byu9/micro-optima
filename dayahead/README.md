@@ -39,10 +39,10 @@ To use the learned model to forecast
     --prediction nyiso_results/test-N.Y.C..csv
 ```
 
-## Forecast Validation Program Usage
+## Forecast Visualization Program Usage
 
 ```sh
-./da_validate.py \
+./da_visualize.py \
     --prediction nyiso_results/test-N.Y.C..csv \
     --target nyiso_dataset/test/target-N.Y.C..csv \
     --parse-dates
