@@ -12,6 +12,11 @@
                     +--------------------+
 ```
 
+## Sample datasets
+
+* `nyiso_dataset`: historical load and historical weather forecasts from NYISO
+  website. Run `compile_dataset.py` under the sub folder.
+
 ## Forecast Program Usage
 
 To learn a model:
