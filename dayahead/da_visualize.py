@@ -55,14 +55,15 @@ def _run_main():
     plt.figure()
     plt.scatter(target.index, target, label='target', marker='.', s=10, color='white')
     _plot_heatmap(predict_dist,
-                  vlo=predict_dist.ppf(0.05).min(),
-                  vhi=predict_dist.ppf(0.95).max(),
+                  vlo=target['Target'].min(),
+                  vhi=target['Target'].max(),
                   hlo=prediction.index.min(),
                   hhi=prediction.index.max())
     plt.legend()
     plt.grid(color='white', alpha=0.3)
     plt.title(args.prediction)
     plt.xlabel('Observation Index')
+    plt.xticks(rotation=45)
     plt.ylabel('Target')
     plt.show()
 
