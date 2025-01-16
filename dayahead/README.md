@@ -66,6 +66,21 @@ To use the learned model to forecast
     --parse-dates
 ```
 
+
+## Forecast Validation Program Usage
+
+```sh
+./da_validate.py \
+    --prediction nyiso_results/test-N.Y.C..csv \
+    --target ../nyiso_dataset/da_test/target-N.Y.C..csv
+```
+
+```sh
+./da_validate.py \
+    --prediction liege_results/test-pv.csv \
+    --target ../liege_dataset/da_test/target-pv.csv
+```
+
 ## Model file format
 
 The model file is a pickled python object.
