@@ -14,13 +14,19 @@ from .normal_dist import NormalDist
 def _sigmoid_primitive(activation):
     # The two cases are mathematically equivalent but are separated to improve
     # numerical stability.
-    exp_term1 = np.exp(-activation, where=activation >= 0)
-    exp_term2 = np.exp(activation, where=activation < 0)
 
-    primitive = 1 / (1 + exp_term1)
-    primitive = np.divide(exp_term2, 1 + exp_term2, where=activation < 0, out=primitive)
+    def sigmoid_pos(alpha):
+        return 1 / (1 + np.exp(-alpha))
 
-    return primitive
+    def sigmoid_neg(alpha):
+        exp_alpha = np.exp(alpha)
+        return exp_alpha / (1 + exp_alpha)
+
+    return np.piecewise(
+        activation,
+        condlist=[activation >= 0, activation < 0],
+        funclist=[sigmoid_pos, sigmoid_neg]
+    )
 
 
 def _sigmoid_derivative(primitive):
