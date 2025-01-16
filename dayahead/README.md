@@ -30,6 +30,15 @@ To learn a model:
     --prediction nyiso_results/train-N.Y.C..csv
 ```
 
+```sh
+./da_forecast.py \
+    --learn \
+    --feature liege_dataset/train/feature-pv.csv \
+    --target liege_dataset/train/target-pv.csv \
+    --model liege_results/pv.model \
+    --prediction liege_results/train-pv.csv
+```
+
 To use the learned model to forecast
 
 ```sh
@@ -39,12 +48,26 @@ To use the learned model to forecast
     --prediction nyiso_results/test-N.Y.C..csv
 ```
 
+```sh
+./da_forecast.py \
+    --feature liege_dataset/test/feature-pv.csv \
+    --model liege_results/pv.model \
+    --prediction liege_results/test-pv.csv
+```
+
 ## Forecast Visualization Program Usage
 
 ```sh
 ./da_visualize.py \
     --prediction nyiso_results/test-N.Y.C..csv \
     --target nyiso_dataset/test/target-N.Y.C..csv \
+    --parse-dates
+```
+
+```sh
+./da_visualize.py \
+    --prediction liege_results/test-pv.csv \
+    --target liege_dataset/test/target-pv.csv \
     --parse-dates
 ```
 
