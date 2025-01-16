@@ -1,15 +1,15 @@
 # Day-Ahead Forecasting
 
 ```
-                    +--------------------+
-    Feature file => |  Forecast program  | => Prediction file
-     Target file => |  (learning mode)   | => Model file
-                    +--------------------+
+                    +-----------------------+
+    Feature file => |  DA Forecast program  | => Prediction file
+     Target file => |    (learning mode)    | => Model file
+                    +-----------------------+
 
-                    +--------------------+
-    Feature file => |  Forecast program  | => Prediction file
-      Model file => |  (prediction mode) |
-                    +--------------------+
+                    +-----------------------+
+    Feature file => |  DA Forecast program  | => Prediction file
+      Model file => |   (prediction mode)   |
+                    +-----------------------+
 ```
 
 ## Forecast Program Usage
