@@ -182,8 +182,19 @@ def _compile_dataset_for_id(dataset):
     # Resample to 15 minute datasets
     dataset = dataset.resample('15min').mean()
 
+    # Only keep last 1000 samples
+    dataset = dataset.tail(1000)
+
     # Rename load column as target
     dataset.rename(columns={'Load': 'Target'}, inplace=True)
+
+    def split_dataset(_dataset, _train_ratio):
+        _dataset = _dataset.sort_index()
+        split_pos = int(len(_dataset) * _train_ratio)
+
+        train = _dataset[:split_pos]
+        test = _dataset[split_pos:]
+        return train, test
 
     # Split dataset by zones
     for zone in dataset.columns.get_level_values(0):
@@ -193,9 +204,7 @@ def _compile_dataset_for_id(dataset):
         zonal.dropna(axis='index', inplace=True)
 
         # Split into train and test and drop timestamps
-        train_indices = zonal.index < '2024-01-01'
-        zonal_train = zonal[train_indices]
-        zonal_test = zonal[~train_indices]
+        zonal_train, zonal_test = split_dataset(zonal, _train_ratio=0.7)
 
         _logger.info(f'Writing datasets for {zone}.')
         _save_target(zonal_train, f'id_train/target-{zona_name}.csv')
