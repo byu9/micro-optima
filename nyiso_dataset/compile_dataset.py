@@ -158,6 +158,8 @@ def _compile_dataset_for_da(dataset):
 
     # Split dataset by zones
     for zone in dataset.columns.get_level_values(0):
+        zona_name = zone.replace(' ', '_').replace('.', '')
+
         zonal = dataset[zone].copy()
 
         # Construct additional columns
@@ -170,10 +172,10 @@ def _compile_dataset_for_da(dataset):
         zonal_test = zonal[~train_indices]
 
         _logger.info(f'Writing datasets for {zone}.')
-        _save_feature(zonal_train, f'da_train/feature-{zone}.csv')
-        _save_feature(zonal_test, f'da_test/feature-{zone}.csv')
-        _save_target(zonal_train, f'da_train/target-{zone}.csv')
-        _save_target(zonal_test, f'da_test/target-{zone}.csv')
+        _save_feature(zonal_train, f'da_train/feature-{zona_name}.csv')
+        _save_feature(zonal_test, f'da_test/feature-{zona_name}.csv')
+        _save_target(zonal_train, f'da_train/target-{zona_name}.csv')
+        _save_target(zonal_test, f'da_test/target-{zona_name}.csv')
 
 
 def _compile_dataset_for_id(dataset):
@@ -185,6 +187,8 @@ def _compile_dataset_for_id(dataset):
 
     # Split dataset by zones
     for zone in dataset.columns.get_level_values(0):
+        zona_name = zone.replace(' ', '_').replace('.', '')
+
         zonal = dataset[zone].copy()
         zonal.dropna(axis='index', inplace=True)
 
@@ -194,8 +198,8 @@ def _compile_dataset_for_id(dataset):
         zonal_test = zonal[~train_indices]
 
         _logger.info(f'Writing datasets for {zone}.')
-        _save_target(zonal_train, f'id_train/target-{zone}.csv')
-        _save_target(zonal_test, f'id_test/target-{zone}.csv')
+        _save_target(zonal_train, f'id_train/target-{zona_name}.csv')
+        _save_target(zonal_test, f'id_test/target-{zona_name}.csv')
 
 
 def _compile_datasets():
