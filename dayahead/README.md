@@ -19,10 +19,10 @@ To learn a model:
 ```sh
 ./da_forecast.py \
     --learn \
-    --feature ../nyiso_dataset/da_train/feature-N.Y.C..csv \
-    --target ../nyiso_dataset/da_train/target-N.Y.C..csv \
-    --model nyiso_results/N.Y.C..model \
-    --prediction nyiso_results/train-N.Y.C..csv
+    --feature ../nyiso_dataset/da_train/feature-NYC.csv \
+    --target ../nyiso_dataset/da_train/target-NYC.csv \
+    --model nyiso_results/NYC.model \
+    --prediction nyiso_results/train-NYC.csv
 ```
 
 ```sh
@@ -38,9 +38,9 @@ To use the learned model to forecast
 
 ```sh
 ./da_forecast.py \
-    --feature ../nyiso_dataset/da_test/feature-N.Y.C..csv \
-    --model nyiso_results/N.Y.C..model \
-    --prediction nyiso_results/test-N.Y.C..csv
+    --feature ../nyiso_dataset/da_test/feature-NYC.csv \
+    --model nyiso_results/NYC.model \
+    --prediction nyiso_results/test-NYC.csv
 ```
 
 ```sh
@@ -54,8 +54,8 @@ To use the learned model to forecast
 
 ```sh
 ./da_visualize.py \
-    --prediction nyiso_results/test-N.Y.C..csv \
-    --target ../nyiso_dataset/da_test/target-N.Y.C..csv \
+    --prediction nyiso_results/test-NYC.csv \
+    --target ../nyiso_dataset/da_test/target-NYC.csv \
     --parse-dates
 ```
 
@@ -71,8 +71,8 @@ To use the learned model to forecast
 
 ```sh
 ./da_validate.py \
-    --prediction nyiso_results/test-N.Y.C..csv \
-    --target ../nyiso_dataset/da_test/target-N.Y.C..csv
+    --prediction nyiso_results/test-NYC.csv \
+    --target ../nyiso_dataset/da_test/target-NYC.csv
 ```
 
 ```sh

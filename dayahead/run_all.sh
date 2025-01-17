@@ -50,15 +50,12 @@ validate_liege_model() {
 
 run_task() {
   zones_var=$1_zones
-  for zone in ${!zones_var}
-  do
-    train_${1}_model $zone
-    forecast_${1}_model $zone
-  done
 
   > ${1}_results.txt
   for zone in ${!zones_var}
   do
+    train_${1}_model $zone
+    forecast_${1}_model $zone
     echo $zone $(validate_${1}_model $zone) >> ${1}_results.txt
   done
 }
