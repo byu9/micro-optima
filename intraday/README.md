@@ -19,9 +19,9 @@ To learn a model:
 ```sh
 ./id_forecast.py \
     --learn \
-    --target ../nyiso_dataset/id_train/target-N.Y.C..csv \
-    --model nyiso_results/N.Y.C..model \
-    --prediction nyiso_results/train-N.Y.C..csv
+    --target ../nyiso_dataset/id_train/target-NYC.csv \
+    --model nyiso_results/NYC.model \
+    --prediction nyiso_results/train-NYC.csv
 ```
 
 ```sh
@@ -38,9 +38,9 @@ observations up to T-1.
 ```sh
 ./id_forecast.py \
     --in-sample \
-    --target ../nyiso_dataset/id_test/target-N.Y.C..csv \
-    --model nyiso_results/N.Y.C..model \
-    --prediction nyiso_results/test-N.Y.C..csv
+    --target ../nyiso_dataset/id_test/target-NYC.csv \
+    --model nyiso_results/NYC.model \
+    --prediction nyiso_results/test-NYC.csv
 ```
 
 ```sh
@@ -56,9 +56,9 @@ previous forecasts.
 
 ```sh
 ./id_forecast.py \
-    --target ../nyiso_dataset/id_test/target-N.Y.C..csv \
-    --model nyiso_results/N.Y.C..model \
-    --prediction nyiso_results/forecast-N.Y.C..csv
+    --target ../nyiso_dataset/id_test/target-NYC.csv \
+    --model nyiso_results/NYC.model \
+    --prediction nyiso_results/forecast-NYC.csv
 ```
 
 ```sh
@@ -72,8 +72,8 @@ previous forecasts.
 
 ```sh
 ./id_visualize.py \
-    --prediction nyiso_results/test-N.Y.C..csv \
-    --target ../nyiso_dataset/id_test/target-N.Y.C..csv \
+    --prediction nyiso_results/test-NYC.csv \
+    --target ../nyiso_dataset/id_test/target-NYC.csv \
     --parse-dates
 ```
 
@@ -88,8 +88,8 @@ previous forecasts.
 
 ```sh
 ./id_validate.py \
-    --prediction nyiso_results/test-N.Y.C..csv \
-    --target ../nyiso_dataset/id_test/target-N.Y.C..csv
+    --prediction nyiso_results/test-NYC.csv \
+    --target ../nyiso_dataset/id_test/target-NYC.csv
 ```
 
 ```sh

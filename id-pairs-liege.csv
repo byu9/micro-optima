@@ -1,0 +1,3 @@
+Label,Prediction,Target
+liege-load,results/id/test-liege-load.csv,datasets/id_test/target-liege-load.csv
+liege-pv,results/id/test-liege-pv.csv,datasets/id_test/target-liege-pv.csv
