@@ -172,10 +172,10 @@ def _compile_dataset_for_da(dataset):
         zonal_test = zonal[~train_indices]
 
         _logger.info(f'Writing datasets for {zone}.')
-        _save_feature(zonal_train, f'da_train/feature-{zona_name}.csv')
-        _save_feature(zonal_test, f'da_test/feature-{zona_name}.csv')
-        _save_target(zonal_train, f'da_train/target-{zona_name}.csv')
-        _save_target(zonal_test, f'da_test/target-{zona_name}.csv')
+        _save_feature(zonal_train, f'../da_train/feature-nyiso-{zona_name}.csv')
+        _save_feature(zonal_test, f'../da_test/feature-nyiso-{zona_name}.csv')
+        _save_target(zonal_train, f'../da_train/target-nyiso-{zona_name}.csv')
+        _save_target(zonal_test, f'../da_test/target-nyiso-{zona_name}.csv')
 
 
 def _compile_dataset_for_id(dataset):
@@ -207,8 +207,8 @@ def _compile_dataset_for_id(dataset):
         zonal_train, zonal_test = split_dataset(zonal, _train_ratio=0.7)
 
         _logger.info(f'Writing datasets for {zone}.')
-        _save_target(zonal_train, f'id_train/target-{zona_name}.csv')
-        _save_target(zonal_test, f'id_test/target-{zona_name}.csv')
+        _save_target(zonal_train, f'../id_train/target-nyiso-{zona_name}.csv')
+        _save_target(zonal_test, f'../id_test/target-nyiso-{zona_name}.csv')
 
 
 def _compile_datasets():

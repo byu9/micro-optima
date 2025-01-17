@@ -122,17 +122,17 @@ def _compile_dataset_for_da(unpack_folder):
     pv_train, pv_test = _split_dataset(pv_dataset, train_ratio=0.7)
     load_train, load_test = _split_dataset(load_dataset, train_ratio=0.7)
 
-    _save_feature(pv_train, save_as='da_train/feature-pv.csv')
-    _save_target(pv_train, save_as='da_train/target-pv.csv')
+    _save_feature(pv_train, save_as='../da_train/feature-liege-pv.csv')
+    _save_target(pv_train, save_as='../da_train/target-liege-pv.csv')
 
-    _save_feature(pv_test, save_as='da_test/feature-pv.csv')
-    _save_target(pv_test, save_as='da_test/target-pv.csv')
+    _save_feature(pv_test, save_as='../da_test/feature-liege-pv.csv')
+    _save_target(pv_test, save_as='../da_test/target-liege-pv.csv')
 
-    _save_feature(load_train, save_as='da_train/feature-load.csv')
-    _save_target(load_train, save_as='da_train/target-load.csv')
+    _save_feature(load_train, save_as='../da_train/feature-liege-load.csv')
+    _save_target(load_train, save_as='../da_train/target-liege-load.csv')
 
-    _save_feature(load_test, save_as='da_test/feature-load.csv')
-    _save_target(load_test, save_as='da_test/target-load.csv')
+    _save_feature(load_test, save_as='../da_test/feature-liege-load.csv')
+    _save_target(load_test, save_as='../da_test/target-liege-load.csv')
 
 
 def _compile_dataset_for_id(unpack_folder):
@@ -145,10 +145,10 @@ def _compile_dataset_for_id(unpack_folder):
     pv_train, pv_test = _split_dataset(pv_dataset, train_ratio=0.7)
     load_train, load_test = _split_dataset(load_dataset, train_ratio=0.7)
 
-    _save_target(pv_train, save_as='id_train/target-pv.csv')
-    _save_target(pv_test, save_as='id_test/target-pv.csv')
-    _save_target(load_train, save_as='id_train/target-load.csv')
-    _save_target(load_test, save_as='id_test/target-load.csv')
+    _save_target(pv_train, save_as='../id_train/target-liege-pv.csv')
+    _save_target(pv_test, save_as='../id_test/target-liege-pv.csv')
+    _save_target(load_train, save_as='../id_train/target-liege-load.csv')
+    _save_target(load_test, save_as='../id_test/target-liege-load.csv')
 
 
 def _compile_datasets():
