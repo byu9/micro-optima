@@ -55,7 +55,7 @@ def _run_learn_task(args):
     if not feature.index.equals(target.index):
         raise ValueError(f'Feature and target contains different indices.')
 
-    model = FuzzyProbTree(max_split=20, batch_size=16, epochs=30, min_samples=5)
+    model = FuzzyProbTree(max_split=20, batch_size=16, epochs=0, min_samples=5)
     model.fit(feature.to_numpy(), target.to_numpy().squeeze())
 
     with open(args.model, 'wb') as model_file:
