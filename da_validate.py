@@ -12,6 +12,11 @@ def _mape_score(mean, std, target):
     return abs(target - mean).mean() / target.max() * 100
 
 
+def _mae_score(mean, std, target):
+    del std
+    return abs(target - mean).mean()
+
+
 def _log_likelihood_score(mean, std, target):
     return -norm.logpdf(target, loc=mean, scale=std).mean()
 
@@ -20,6 +25,14 @@ def _crps_score(mean, std, target):
     z = (target - mean) / std
     score = std * (z * (2 * norm.cdf(z) - 1) + 2 * norm.pdf(z) - 1 / np.sqrt(np.pi))
     return score.mean()
+
+
+_supported_scores = {
+    'mape': _mape_score,
+    'mae': _mae_score,
+    'll': _log_likelihood_score,
+    'crps': _crps_score
+}
 
 
 def _parse_args():
@@ -59,8 +72,13 @@ def _load_prediction(filename):
 def _calculate_score(predict_filename, target_filename, score_func):
     mean, std = _load_prediction(predict_filename)
     target = _load_target(target_filename)
-    score = score_func(mean=mean, std=std, target=target)
-    return score
+
+    all_scores = {
+        score: score_func(mean=mean, std=std, target=target)
+        for score, score_func in _supported_scores.items()
+    }
+
+    return all_scores
 
 
 def _run_main():
@@ -68,11 +86,11 @@ def _run_main():
     pairs = _load_pairs_table(args.pairs)
 
     score_dict = {
-        label: _calculate_score(paths['Prediction'], paths['Target'], _mape_score)
+        label: _calculate_score(paths['Prediction'], paths['Target'], _crps_score)
         for label, paths in pairs.items()
     }
 
-    scoreboard = pd.DataFrame.from_dict(score_dict, orient='index', columns=['mape'])
+    scoreboard = pd.DataFrame.from_dict(score_dict, orient='index')
     scoreboard.loc['(mean)'] = scoreboard.mean(axis='index')
     scoreboard.to_csv(args.scoreboard, index_label='Label')
 
