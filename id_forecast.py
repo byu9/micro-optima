@@ -149,7 +149,7 @@ _supported_models = {
 def _parse_args():
     parser = ArgumentParser(
         allow_abbrev=False,
-        description='Learns a intra-day forecast model or use a learned model to make a forecast.'
+        description='Learns an intraday forecast model or uses a learned model to make a forecast.'
     )
 
     parser.add_argument(

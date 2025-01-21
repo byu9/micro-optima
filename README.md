@@ -67,7 +67,7 @@ in a subsequent version.
 usage: id_forecast.py [-h] [--learn {ar8,dt8,nn8k20,rf8,mlp111}] --model MODEL --target TARGET
                       [--prediction PREDICTION]
 
-Learns a intra-day forecast model or use a learned model to make a forecast.
+Learns an intraday forecast model or uses a learned model to make a forecast.
 
 options:
   -h, --help            show this help message and exit
