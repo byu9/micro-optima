@@ -70,9 +70,9 @@ predictions on the training dataset to file.
 ```sh
 ./id_forecast.py \
     --learn=ar8 \
-    --target datasets/id_train/target-nyiso-NYC.csv \
-    --model results/id/target-nyiso-NYC.model \
-    --prediction results/id/train-nyiso-NYC.csv
+    --target datasets/id_train/target-liege-PV.csv \
+    --model results/id/target-liege-PV.model \
+    --prediction results/id/train-liege-PV.csv
 ```
 
 Run the program in prediction mode by loading the forecast model and write the
@@ -80,9 +80,9 @@ predictions on the test dataset to file.
 
 ```sh
 ./id_forecast.py \
-    --target datasets/id_test/target-nyiso-NYC.csv \
-    --model results/id/target-nyiso-NYC.model \
-    --prediction results/id/test-nyiso-NYC.csv
+    --target datasets/id_test/target-liege-PV.csv \
+    --model results/id/target-liege-PV.model \
+    --prediction results/id/test-liege-PV.csv
 ```
 
 If unsure, run the program with `--help` to display help. The following is
@@ -111,10 +111,10 @@ options:
 
 ```sh
 ./id_visualize.py \
-    --prediction results/id/test-nyiso-NYC.csv \
-    --target datasets/id_test/target-nyiso-NYC.csv \
+    --prediction results/id/test-liege-PV.csv \
+    --target datasets/id_test/target-liege-PV.csv \
     --parse-dates \
-    --title nyiso-NYC
+    --title liege-PV
 ```
 
 If unsure, run the program with `--help` to display help. The following is
@@ -213,10 +213,10 @@ predictions on the training dataset to file.
 ```sh
   ./da_forecast.py \
     --learn=fuzzyprob \
-    --feature datasets/da_train/feature-nyiso-NYC.csv \
-    --target datasets/da_train/target-nyiso-NYC.csv \
-    --model results/da/target-nyiso-NYC.model \
-    --prediction results/da/train-nyiso-NYC.csv
+    --feature datasets/da_train/feature-liege-PV.csv \
+    --target datasets/da_train/target-liege-PV.csv \
+    --model results/da/target-liege-PV.model \
+    --prediction results/da/train-liege-PV.csv
 ```
 
 Run the program in prediction mode by loading the forecast model and write the
@@ -224,10 +224,10 @@ predictions on the test dataset to file.
 
 ```sh
   ./da_forecast.py \
-    --feature datasets/da_test/feature-nyiso-NYC.csv \
-    --target datasets/da_test/target-nyiso-NYC.csv \
-    --model results/da/target-nyiso-NYC.model \
-    --prediction results/da/test-nyiso-NYC.csv
+    --feature datasets/da_test/feature-liege-PV.csv \
+    --target datasets/da_test/target-liege-PV.csv \
+    --model results/da/target-liege-PV.model \
+    --prediction results/da/test-liege-PV.csv
 ```
 
 If unsure, run the program with `--help` to display help. The following is
@@ -258,10 +258,10 @@ options:
 
 ```sh
   ./da_visualize.py \
-    --prediction results/da/test-nyiso-NYC.csv \
-    --target datasets/da_test/target-nyiso-NYC.csv \
+    --prediction results/da/test-liege-PV.csv \
+    --target datasets/da_test/target-liege-PV.csv \
     --parse-dates \
-    --title nyiso-NYC 
+    --title liege-PV 
 ```
 
 If unsure, run the program with `--help` to display help. The following is
