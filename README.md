@@ -293,7 +293,7 @@ options:
 ```sh
   ./da_validate.py \
     --pairs da-pairs-nyiso.csv \
-    --scoreboard results/da/validate-nyiso-$timestamp.csv
+    --scoreboard results/da/validate-nyiso.csv
 ```
 
 If unsure, run the program with `--help` to display help. The following is
