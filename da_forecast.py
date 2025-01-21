@@ -70,7 +70,7 @@ class FuzzyProb(DAForecastModel):
         self._model = None
 
     def fit(self, feature, target, save_prediction=None):
-        self._model = FuzzyProbTree(max_split=20, batch_size=16, epochs=0, min_samples=5)
+        self._model = FuzzyProbTree(max_split=20, batch_size=8, epochs=40, min_samples=5)
         self._model.fit(feature.to_numpy(), target.to_numpy().squeeze())
         return self.predict(feature, save_prediction=save_prediction)
 
