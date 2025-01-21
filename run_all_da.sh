@@ -15,7 +15,7 @@ train_model() {
 test_model() {
   echo test model $1
   ./da_forecast.py \
-    --feature datasets/da_train/feature-$1.csv \
+    --feature datasets/da_test/feature-$1.csv \
     --target datasets/da_test/target-$1.csv \
     --model results/da/target-$1.model \
     --prediction results/da/test-$1.csv
@@ -54,4 +54,4 @@ run_task() {
   validate_model liege
 }
 
-run_task fuzzyprob
+run_task xgboost
