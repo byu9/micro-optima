@@ -31,8 +31,7 @@ visualize_prediction() {
 validate_model() {
   ./id_validate.py \
     --pairs id-pairs-$1.csv \
-    --scoreboard results/id/validate-$1-$timestamp.csv \
-    --model $2
+    --scoreboard results/id/validate-$1-$timestamp.csv
 }
 
 
@@ -54,4 +53,4 @@ run_task() {
   validate_model liege $1
 }
 
-run_task ar8
+run_task zoh
