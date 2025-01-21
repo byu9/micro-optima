@@ -5,4 +5,3 @@ scipy
 tqdm
 statsmodels
 scikit-learn
-ngboost
