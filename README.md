@@ -1,6 +1,23 @@
-# MicroOptima
+MicroOptima: Energy Management Tool Suite for the Microgrid Project
 
-Energy Management Tool Suite for Microgrid C³ Project
+<!-- TOC -->
+  * [Python Dependencies](#python-dependencies)
+  * [Dataset Preparation](#dataset-preparation)
+  * [Intraday (ID) Forecasting](#intraday-id-forecasting)
+  * [Intraday Forecast Program Usage](#intraday-forecast-program-usage)
+  * [Intraday Forecast Visualization Program Usage](#intraday-forecast-visualization-program-usage)
+  * [Intraday Forecast Validation Program Usage](#intraday-forecast-validation-program-usage)
+  * [Intraday Model File Format](#intraday-model-file-format)
+  * [Intraday Target File Format](#intraday-target-file-format)
+  * [Intraday Prediction File Format](#intraday-prediction-file-format)
+  * [Day-Ahead Forecasting](#day-ahead-forecasting)
+  * [Day-Ahead Forecast Program Usage](#day-ahead-forecast-program-usage)
+  * [Day-Ahead Forecast Visualization Program Usage](#day-ahead-forecast-visualization-program-usage)
+  * [Day-Ahead Forecast Validation Program Usage](#day-ahead-forecast-validation-program-usage)
+  * [Day-Ahead Feature File Format](#day-ahead-feature-file-format)
+  * [Day-Ahead Target File Format](#day-ahead-target-file-format)
+  * [Day-Ahead Prediction File Format](#day-ahead-prediction-file-format)
+<!-- TOC -->
 
 ## Python Dependencies
 
@@ -97,8 +114,7 @@ options:
     --prediction results/id/test-nyiso-NYC.csv \
     --target datasets/id_test/target-nyiso-NYC.csv \
     --parse-dates \
-    --title nyiso-NYC \
-    --save results/id/test-nyiso-NYC.png
+    --title nyiso-NYC
 ```
 
 If unsure, run the program with `--help` to display help. The following is
@@ -187,6 +203,114 @@ prediction.
  DA Feature file => |  DA Forecast program  | => DA Prediction file
   DA  Model file => |   (prediction mode)   |
                     +-----------------------+
+```
+
+## Day-Ahead Forecast Program Usage
+
+Run the program in learning mode to create a forecast model and write the
+predictions on the training dataset to file.
+
+```sh
+  ./da_forecast.py \
+    --learn=fuzzyprob \
+    --feature datasets/da_train/feature-nyiso-NYC.csv \
+    --target datasets/da_train/target-nyiso-NYC.csv \
+    --model results/da/target-nyiso-NYC.model \
+    --prediction results/da/train-nyiso-NYC.csv
+```
+
+Run the program in prediction mode by loading the forecast model and write the
+predictions on the test dataset to file.
+
+```sh
+  ./da_forecast.py \
+    --feature datasets/da_test/feature-nyiso-NYC.csv \
+    --target datasets/da_test/target-nyiso-NYC.csv \
+    --model results/da/target-nyiso-NYC.model \
+    --prediction results/da/test-nyiso-NYC.csv
+```
+
+If unsure, run the program with `--help` to display help. The following is
+sample
+output from a previous version. The actual message displayed may differ in a
+subsequent version.
+
+```
+./da_forecast.py --help
+usage: da_forecast.py [-h] [--learn {fuzzyprob,gpr}] --model MODEL --feature FEATURE --target
+                      TARGET [--prediction PREDICTION]
+
+Learns a day-ahead forecast model or uses a learned model to make a forecast.
+
+options:
+  -h, --help            show this help message and exit
+  --learn {fuzzyprob,gpr}
+                        put the program in learn mode and learn with specified model
+  --model MODEL         in learn mode, the file path to write the model to; in forecast mode,
+                        the file path to load the model from
+  --feature FEATURE     the file path to load historical covariates from
+  --target TARGET       the file path to load historical observations from
+  --prediction PREDICTION
+                        the file path to write predictions to
+```
+
+## Day-Ahead Forecast Visualization Program Usage
+
+```sh
+  ./da_visualize.py \
+    --prediction results/da/test-nyiso-NYC.csv \
+    --target datasets/da_test/target-nyiso-NYC.csv \
+    --parse-dates \
+    --title nyiso-NYC 
+```
+
+If unsure, run the program with `--help` to display help. The following is
+sample
+output from a previous version. The actual message displayed may differ in a
+subsequent version.
+
+```
+./da_visualize.py --help
+usage: da_visualize.py [-h] --prediction PREDICTION --target TARGET
+                       [--parse-dates | --no-parse-dates] [--title TITLE] [--save SAVE]
+
+Visualizes the prediction of a intraday forecast model.
+
+options:
+  -h, --help            show this help message and exit
+  --prediction PREDICTION
+                        path to load the prediction file from
+  --target TARGET       path to load the target file from
+  --parse-dates, --no-parse-dates
+                        parse the index column as timestamps instead of observation numbers
+  --title TITLE         use the given title in the plot
+  --save SAVE           save the plot to the given path as image (image type determined from
+                        suffix)
+```
+
+## Day-Ahead Forecast Validation Program Usage
+
+```sh
+  ./da_validate.py \
+    --pairs da-pairs-nyiso.csv \
+    --scoreboard results/da/validate-nyiso-$timestamp.csv
+```
+
+If unsure, run the program with `--help` to display help. The following is
+sample output from a previous version. The actual message displayed may differ
+in a subsequent version.
+
+```
+./da_validate.py --help
+usage: da_validate.py [-h] --pairs PAIRS --scoreboard SCOREBOARD
+
+Validates intraday predictions against actual observations.
+
+options:
+  -h, --help            show this help message and exit
+  --pairs PAIRS         CSV file listing prediction/target file pairs
+  --scoreboard SCOREBOARD
+                        file to write the validation scores to
 ```
 
 ## Day-Ahead Feature File Format

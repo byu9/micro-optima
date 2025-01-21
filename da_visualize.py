@@ -10,10 +10,30 @@ from scipy.stats import norm
 
 
 def _parse_args():
-    parser = ArgumentParser(allow_abbrev=False)
-    parser.add_argument('--prediction', type=Path, required=True)
-    parser.add_argument('--target', type=Path, required=True)
-    parser.add_argument('--parse-dates', action=BooleanOptionalAction)
+    parser = ArgumentParser(
+        allow_abbrev=False,
+        description='Visualizes the prediction of a intraday forecast model.'
+    )
+    parser.add_argument(
+        '--prediction', type=Path, required=True,
+        help='path to load the prediction file from'
+    )
+    parser.add_argument(
+        '--target', type=Path, required=True,
+        help='path to load the target file from'
+    )
+    parser.add_argument(
+        '--parse-dates', action=BooleanOptionalAction,
+        help='parse the index column as timestamps instead of observation numbers'
+    )
+    parser.add_argument(
+        '--title', type=str, default=None,
+        help='use the given title in the plot'
+    )
+    parser.add_argument(
+        '--save', type=Path, default=None,
+        help='save the plot to the given path as image (image type determined from suffix)'
+    )
     args = parser.parse_args()
     return args
 
@@ -35,7 +55,9 @@ def _load_prediction(args):
         prediction.index = pd.to_datetime(prediction.index, utc=True)
         prediction.sort_index(inplace=True)
 
-    return prediction
+    predict_data = norm(loc=prediction['Mean'], scale=prediction['Std'])
+
+    return predict_data
 
 
 def _plot_heatmap(dist, vlo, vhi, hlo, hhi, resolution=200):
@@ -49,23 +71,27 @@ def _run_main():
     args = _parse_args()
 
     prediction = _load_prediction(args)
-    predict_dist = norm(loc=prediction['Mean'], scale=prediction['Std'])
     target = _load_target(args)
 
     plt.figure()
     plt.scatter(target.index, target, label='target', marker='.', s=10, color='white')
-    _plot_heatmap(predict_dist,
+    _plot_heatmap(prediction,
                   vlo=target['Target'].min(),
                   vhi=target['Target'].max(),
-                  hlo=prediction.index.min(),
-                  hhi=prediction.index.max())
+                  hlo=target.index.min(),
+                  hhi=target.index.max())
     plt.legend()
     plt.grid(color='white', alpha=0.3)
     plt.title(args.prediction)
     plt.xlabel('Observation Index')
     plt.xticks(rotation=45)
     plt.ylabel('Target')
-    plt.show()
+
+    if args.save is None:
+        plt.show()
+
+    else:
+        plt.savefig(args.save)
 
 
 if __name__ == '__main__':
