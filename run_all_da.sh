@@ -37,9 +37,35 @@ validate_model() {
 }
 
 zones='
-nyiso-CAPITL nyiso-CENTRL nyiso-DUNWOD nyiso-GENESE nyiso-HUD_VL
-nyiso-LONGIL nyiso-MHK_VL nyiso-MILLWD nyiso-NORTH nyiso-NYC
-nyiso-WEST liege-load liege-pv
+nyiso-CAPITL
+nyiso-CENTRL
+nyiso-DUNWOD
+nyiso-GENESE
+nyiso-HUD_VL
+nyiso-LONGIL
+nyiso-MHK_VL
+nyiso-MILLWD
+nyiso-NORTH
+nyiso-NYC
+nyiso-WEST
+
+liege-load
+liege-pv
+
+europe-AT
+europe-BE
+europe-BG
+europe-CH
+europe-CZ
+europe-DK
+europe-ES
+europe-FR
+europe-GR
+europe-IT
+europe-NL
+europe-PT
+europe-SI
+europe-SK
 '
 
 run_task() {
@@ -52,6 +78,7 @@ run_task() {
 
   validate_model nyiso
   validate_model liege
+  validate_model europe
 }
 
-run_task xgboost
+run_task fuzzyprob
