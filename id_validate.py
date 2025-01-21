@@ -28,10 +28,18 @@ def _build_future_target_matrix(target, look_ahead):
 
 
 def _parse_args():
-    parser = ArgumentParser(allow_abbrev=False)
-    parser.add_argument('--pairs', type=Path, required=True)
-    parser.add_argument('--scoreboard', type=Path, required=True)
-    parser.add_argument('--model', type=str, required=True)
+    parser = ArgumentParser(
+        allow_abbrev=False,
+        description='Validates intraday predictions against actual observations.'
+    )
+    parser.add_argument(
+        '--pairs', type=Path, required=True,
+        help='CSV file listing prediction/target file pairs'
+    )
+    parser.add_argument(
+        '--scoreboard', type=Path, required=True,
+        help='file to write the validation scores to'
+    )
     args = parser.parse_args()
     return args
 
@@ -71,7 +79,7 @@ def _run_main():
     }
 
     scoreboard = pd.DataFrame.from_dict(score_dict, orient='index')
-    scoreboard.loc[args.model] = scoreboard.mean(axis='index')
+    scoreboard.loc['(mean)'] = scoreboard.mean(axis='index')
     scoreboard.to_csv(args.scoreboard, index_label='Label')
 
 
