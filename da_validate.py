@@ -7,17 +7,18 @@ import pandas as pd
 from scipy.stats import norm
 
 
-def _mape_score(mu, y):
-    return abs(y - mu).mean() / y.max()
+def _mape_score(mean, std, target):
+    del std
+    return abs(target - mean).mean() / target.max() * 100
 
 
-def _log_likelihood_score(mu, sigma, y):
-    return -norm.logpdf(y, loc=mu, scale=sigma).mean()
+def _log_likelihood_score(mean, std, target):
+    return -norm.logpdf(target, loc=mean, scale=std).mean()
 
 
-def _crps_score(mu, sigma, y):
-    z = (y - mu) / sigma
-    score = sigma * (z * (2 * norm.cdf(z) - 1) + 2 * norm.pdf(z) - 1 / np.sqrt(np.pi))
+def _crps_score(mean, std, target):
+    z = (target - mean) / std
+    score = std * (z * (2 * norm.cdf(z) - 1) + 2 * norm.pdf(z) - 1 / np.sqrt(np.pi))
     return score.mean()
 
 
@@ -50,15 +51,15 @@ def _load_target(filename):
 
 def _load_prediction(filename):
     prediction = pd.read_csv(filename, index_col='Index')
-    mu = prediction['Mean'].to_numpy()
-    sigma = prediction['Std'].to_numpy()
-    return mu, sigma
+    mean = prediction['Mean'].to_numpy()
+    std = prediction['Std'].to_numpy()
+    return mean, std
 
 
 def _calculate_score(predict_filename, target_filename, score_func):
-    prediction = _load_prediction(predict_filename)
+    mean, std = _load_prediction(predict_filename)
     target = _load_target(target_filename)
-    score = score_func(prediction=prediction, target=target)
+    score = score_func(mean=mean, std=std, target=target)
     return score
 
 
@@ -71,7 +72,7 @@ def _run_main():
         for label, paths in pairs.items()
     }
 
-    scoreboard = pd.DataFrame.from_dict(score_dict, orient='index')
+    scoreboard = pd.DataFrame.from_dict(score_dict, orient='index', columns=['mape'])
     scoreboard.loc['(mean)'] = scoreboard.mean(axis='index')
     scoreboard.to_csv(args.scoreboard, index_label='Label')
 
