@@ -7,8 +7,17 @@ Energy Management Tool Suite for Microgrid C³ Project
 Python interpreter version 3.12 is recommended. Run the following command to
 install all dependencies.
 
-```commandline
+```sh
 pip install -r requirements.txt
+```
+
+## Dataset Preparation
+
+Run the following commands
+
+```sh
+$(cd datasets/nyiso_dataset; ./compile_dataset.py)
+$(cd datasets/liege_dataset; ./compile_dataset.py)
 ```
 
 ## Intraday (ID) Forecasting
