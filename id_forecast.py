@@ -131,7 +131,7 @@ class MLP111(ScikitModelBase):
     def __init__(self):
         super().__init__()
         self._model = MLPRegressor(
-            hidden_layer_sizes=(100,100,100),
+            hidden_layer_sizes=(100, 100, 100),
             learning_rate='adaptive',
             max_iter=1000
         )
@@ -147,11 +147,29 @@ _supported_models = {
 
 
 def _parse_args():
-    parser = ArgumentParser(allow_abbrev=False)
-    parser.add_argument('--learn', type=str, default=None)
-    parser.add_argument('--model', type=Path, required=True)
-    parser.add_argument('--target', type=Path, required=True)
-    parser.add_argument('--prediction', type=Path, default=None)
+    parser = ArgumentParser(
+        allow_abbrev=False,
+        description='Learns a intra-day forecast model or use a learned model to make a forecast.'
+    )
+
+    parser.add_argument(
+        '--learn', type=str, default=None,
+        choices=_supported_models.keys(),
+        help='put the program in learn mode and learn with specified model'
+    )
+    parser.add_argument(
+        '--model', type=Path, required=True,
+        help='in learn mode, the file path to write the model to; '
+             'in forecast mode, the file path to load the model from'
+    )
+    parser.add_argument(
+        '--target', type=Path, required=True,
+        help='the file path to load historical observations from'
+    )
+    parser.add_argument(
+        '--prediction', type=Path, default=None,
+        help='the file path to write predictions to'
+    )
     args = parser.parse_args()
 
     if args.learn is not None:
