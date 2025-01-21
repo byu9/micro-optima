@@ -117,6 +117,14 @@ class AR8(ScikitModelBase):
         self._model = LinearRegression()
 
 
+class ZOH(ScikitModelBase):
+    _LOOK_BACK = 1
+
+    def __init__(self):
+        super().__init__()
+        self._model = LinearRegression(fit_intercept=False)
+
+
 class NN8K20(ScikitModelBase):
     _LOOK_BACK = 8
 
@@ -138,6 +146,7 @@ class MLP111(ScikitModelBase):
 
 
 _supported_models = {
+    'zoh': ZOH,
     'ar8': AR8,
     'dt8': DT8,
     'nn8k20': NN8K20,

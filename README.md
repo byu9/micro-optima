@@ -34,6 +34,7 @@ The following models are currently supported.
 | `rf8`    | 8th order random forest auto-regressor                                             |
 | `nn8k20` | 8th order 20 nearest neighbors auto-regressor                                      |
 | `mlp111` | 8th order multi-layer perceptron auto-regressor with (100, 100, 100) hidden layers |
+| `zoh`    | zero order hold                                                                    |
 
 ## Intraday Forecast Program Usage
 
