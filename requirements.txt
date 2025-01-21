@@ -4,4 +4,7 @@ numpy
 scipy
 tqdm
 statsmodels
-scikit-learn
+
+# xgboost bug workaround
+scikit-learn<1.6
+xgboost

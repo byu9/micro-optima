@@ -6,8 +6,8 @@ from argparse import ArgumentParser
 from pathlib import Path
 
 import pandas as pd
-from ngboost import NGBRegressor
 from sklearn.gaussian_process import GaussianProcessRegressor
+from xgboost_distribution import XGBDistribution
 
 from fuzzyprob import FuzzyProbTree as FuzzyProbTree
 
@@ -44,21 +44,21 @@ class DAForecastModel(metaclass=ABCMeta):
         prediction.to_csv(filename, index_label='Index')
 
 
-class NGBoost(DAForecastModel):
+class XGBoost(DAForecastModel):
     def __init__(self):
         super().__init__()
         self._model = None
 
     def fit(self, feature, target, save_prediction=None):
-        self._model = NGBRegressor()
-        self._model.fit(feature.to_numpy(), target.to_numpy().squeeze())
+        self._model = XGBDistribution(distribution="normal")
+        self._model.fit(feature.to_numpy(), target.to_numpy())
         return self.predict(feature, save_prediction=save_prediction)
 
     def predict(self, feature, save_prediction=None):
-        predict_data = self._model.predict_dist(feature.to_numpy())
+        predict_data = self._model.predict(feature.to_numpy())
 
         if save_prediction is not None:
-            self._save_prediction(mean=predict_data.mean(), std=predict_data.std(),
+            self._save_prediction(mean=predict_data.loc, std=predict_data.scale,
                                   index=feature.index, filename=save_prediction)
         return predict_data
 
@@ -105,7 +105,7 @@ class GPR(DAForecastModel):
 _supported_models = {
     'fuzzyprob': FuzzyProb,
     'gpr': GPR,
-    'ngboost': NGBoost,
+    'xgboost': XGBoost,
 }
 
 
