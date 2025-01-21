@@ -49,8 +49,8 @@ run_task() {
     visualize_prediction $zone
   done
 
-  validate_model nyiso $1
-  validate_model liege $1
+  validate_model nyiso
+  validate_model liege
 }
 
 run_task zoh
