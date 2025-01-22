@@ -24,7 +24,7 @@ def _compile_dataset_for_da(country):
     dataset.rename(columns={'mw': 'Target'}, inplace=True)
 
     # Split into train and test and drop timestamps
-    split_loc = -1465
+    split_loc = -1464
     train = dataset[:split_loc]
     test = dataset[split_loc:]
 
