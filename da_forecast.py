@@ -9,7 +9,7 @@ import pandas as pd
 from sklearn.gaussian_process import GaussianProcessRegressor
 from xgboost_distribution import XGBDistribution
 
-from fuzzyprob import FuzzyProbTree as FuzzyProbTree
+from fuzzyprob import FuzzyProb as _FuzzyProb
 
 
 class DAForecastModel(metaclass=ABCMeta):
@@ -64,13 +64,12 @@ class XGBoost(DAForecastModel):
 
 
 class FuzzyProb(DAForecastModel):
-
     def __init__(self):
         super().__init__()
         self._model = None
 
     def fit(self, feature, target, save_prediction=None):
-        self._model = FuzzyProbTree(max_split=20, batch_size=8, epochs=40, min_samples=5)
+        self._model = _FuzzyProb(max_split=12, min_samples=2, batch_size=32, epochs=20)
         self._model.fit(feature.to_numpy(), target.to_numpy().squeeze())
         return self.predict(feature, save_prediction=save_prediction)
 
@@ -78,7 +77,8 @@ class FuzzyProb(DAForecastModel):
         predict_data = self._model.predict(feature.to_numpy())
 
         if save_prediction is not None:
-            self._save_prediction(mean=predict_data.mean(), std=predict_data.std(),
+            self._save_prediction(mean=predict_data.mean().squeeze(),
+                                  std=predict_data.std().squeeze(),
                                   index=feature.index, filename=save_prediction)
         return predict_data
 
