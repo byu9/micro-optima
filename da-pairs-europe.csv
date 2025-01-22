@@ -1,0 +1,15 @@
+Label,Prediction,Target
+europe-AT,results/da/test-europe-AT.csv,datasets/da_test/target-europe-AT.csv
+europe-BE,results/da/test-europe-BE.csv,datasets/da_test/target-europe-BE.csv
+europe-BG,results/da/test-europe-BG.csv,datasets/da_test/target-europe-BG.csv
+europe-CH,results/da/test-europe-CH.csv,datasets/da_test/target-europe-CH.csv
+europe-CZ,results/da/test-europe-CZ.csv,datasets/da_test/target-europe-CZ.csv
+europe-DK,results/da/test-europe-DK.csv,datasets/da_test/target-europe-DK.csv
+europe-ES,results/da/test-europe-ES.csv,datasets/da_test/target-europe-ES.csv
+europe-FR,results/da/test-europe-FR.csv,datasets/da_test/target-europe-FR.csv
+europe-GR,results/da/test-europe-GR.csv,datasets/da_test/target-europe-GR.csv
+europe-IT,results/da/test-europe-IT.csv,datasets/da_test/target-europe-IT.csv
+europe-NL,results/da/test-europe-NL.csv,datasets/da_test/target-europe-NL.csv
+europe-PT,results/da/test-europe-PT.csv,datasets/da_test/target-europe-PT.csv
+europe-SI,results/da/test-europe-SI.csv,datasets/da_test/target-europe-SI.csv
+europe-SK,results/da/test-europe-SK.csv,datasets/da_test/target-europe-SK.csv
