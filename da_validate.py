@@ -8,23 +8,24 @@ from scipy.stats import norm
 
 
 def _mape_score(mean, std, target):
-    del std
-    return abs(target - mean).mean() / target.max() * 100
+    full_scale = abs(target).max(axis=0)
+    score = abs(target - mean).mean(axis=0) / full_scale * 100
+    return score
 
 
 def _mae_score(mean, std, target):
     del std
-    return abs(target - mean).mean()
+    return abs(target - mean).mean(axis=0)
 
 
 def _log_likelihood_score(mean, std, target):
-    return -norm.logpdf(target, loc=mean, scale=std).mean()
+    return -norm.logpdf(target, loc=mean, scale=std).mean(axis=0)
 
 
 def _crps_score(mean, std, target):
     z = (target - mean) / std
     score = std * (z * (2 * norm.cdf(z) - 1) + 2 * norm.pdf(z) - 1 / np.sqrt(np.pi))
-    return score.mean()
+    return score.mean(axis=0)
 
 
 _supported_scores = {
@@ -58,14 +59,15 @@ def _load_pairs_table(filename):
 
 
 def _load_target(filename):
-    target = pd.read_csv(filename, index_col='Index').to_numpy()
+    target_df = pd.read_csv(filename, index_col='Index')
+    target = target_df['Target'].to_numpy()
     return target
 
 
 def _load_prediction(filename):
-    prediction = pd.read_csv(filename, index_col='Index')
-    mean = prediction['Mean'].to_numpy()
-    std = prediction['Std'].to_numpy()
+    prediction_df = pd.read_csv(filename, index_col='Index')
+    mean = prediction_df['Mean'].to_numpy()
+    std = prediction_df['Std'].to_numpy()
     return mean, std
 
 

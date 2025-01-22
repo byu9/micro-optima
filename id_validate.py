@@ -7,7 +7,7 @@ import pandas as pd
 
 
 def _mape_score(prediction, target):
-    return abs(prediction - target).mean(axis='index') / target.max() * 100
+    return abs(prediction - target).mean(axis='index') / abs(target).max() * 100
 
 
 def _mae_score(prediction, target):
