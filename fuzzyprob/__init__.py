@@ -81,7 +81,7 @@ class _TreeNode(BinaryTreeNode):
     dl_dlog_gamma: NDArray
 
 
-class FuzzyProbTree:
+class FuzzyProb:
 
     def __init__(self, max_split=10, batch_size=8, epochs=20, min_samples=10,
                  min_score_drop=0, random_seed=None):
