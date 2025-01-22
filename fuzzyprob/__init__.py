@@ -33,6 +33,11 @@ def _sigmoid_derivative(primitive):
     return primitive * (1 - primitive)
 
 
+def _sum_of_squared_error(target):
+    predict = target.mean(axis=0)
+    return np.square(target - predict).sum(axis=0)
+
+
 @dataclass(init=False, eq=False)
 class _TreeNode(BinaryTreeNode):
     # Assigned training partition
@@ -178,8 +183,7 @@ class FuzzyProbTree:
         node.dist_params = self._dist.compute_estimate(node.target)
         node.gamma = 1.0
         best_score_drop = self._min_score_drop
-
-        parent_score = self._dist.compute_score(node.dist_params, node.target)
+        parent_score = _sum_of_squared_error(node.target)
 
         n_features, n_samples = node.feature.shape
         feature_ids = tqdm(range(n_features), leave=False)
@@ -205,13 +209,9 @@ class FuzzyProbTree:
                     left_target = target[:split_index]
                     right_target = target[split_index:]
 
-                    left_params = self._dist.compute_estimate(left_target)
-                    right_params = self._dist.compute_estimate(right_target)
-
-                    left_score = self._dist.compute_score(left_params, left_target)
-                    right_score = self._dist.compute_score(right_params, right_target)
-
-                    score_drop = parent_score - left_score - right_score
+                    left_score = _sum_of_squared_error(left_target)
+                    right_score = _sum_of_squared_error(right_target)
+                    score_drop = (parent_score - left_score - right_score) / len(target)
 
                     if score_drop > best_score_drop:
                         best_score_drop = score_drop
