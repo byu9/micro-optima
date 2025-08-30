@@ -4,16 +4,16 @@ import pandas as pd
 
 
 def _read_logger_a():
-    dataframe = pd.read_excel('Logger A/Logger_A_1.xlsx', usecols=[1, 5], names=['Time', 'Target'])
-    dataframe['Time'] = pd.to_datetime(dataframe['Time'])
-    dataframe.set_index('Time', inplace=True)
+    dataframe = pd.read_excel('Logger A/Logger_A_1.xlsx', usecols=[1, 5], names=['Index', 'Target'])
+    dataframe['Index'] = pd.to_datetime(dataframe['Index'])
+    dataframe.set_index('Index', inplace=True)
     return dataframe
 
 
 def _read_logger_b():
-    dataframe = pd.read_excel('Logger B/Logger_B_1.xlsx', usecols=[1, 11], names=['Time', 'Target'])
-    dataframe['Time'] = pd.to_datetime(dataframe['Time'])
-    dataframe.set_index('Time', inplace=True)
+    dataframe = pd.read_excel('Logger B/Logger_B_1.xlsx', usecols=[1, 11], names=['Index', 'Target'])
+    dataframe['Index'] = pd.to_datetime(dataframe['Index'])
+    dataframe.set_index('Index', inplace=True)
     return dataframe
 
 
@@ -72,7 +72,7 @@ def _compile_datasets_fluke_a():
     _save_target(da_test, '../da_test/target-fluke-a.csv')
 
     _save_target(id_train, '../id_train/target-fluke-a.csv')
-    _save_feature(id_test, '../id_test/target-fluke-a.csv')
+    _save_target(id_test, '../id_test/target-fluke-a.csv')
 
 
 def _compile_datasets_fluke_b():
@@ -90,7 +90,7 @@ def _compile_datasets_fluke_b():
     _save_target(da_test, '../da_test/target-fluke-b.csv')
 
     _save_target(id_train, '../id_train/target-fluke-b.csv')
-    _save_feature(id_test, '../id_test/target-fluke-b.csv')
+    _save_target(id_test, '../id_test/target-fluke-b.csv')
 
 
 def _compile_datasets():
