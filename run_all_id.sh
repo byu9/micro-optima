@@ -51,6 +51,7 @@ run_task() {
 
   validate_model nyiso
   validate_model liege
+  validate_model fluke
 }
 
 run_task zoh

@@ -1,0 +1,3 @@
+Label,Prediction,Target
+fluke-a,results/id/test-fluke-a.csv,datasets/id_test/target-fluke-a.csv
+fluke-b,results/id/test-fluke-b.csv,datasets/id_test/target-fluke-b.csv
