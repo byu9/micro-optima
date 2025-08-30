@@ -1,0 +1,9 @@
+﻿Model Number,FLUKE A3000FC
+Tool Name,A3000FC - B
+Logged Data
+
+Start Time,Stop Time,Elapsed Time,Interval,Total Readings
+Aug 20 2234 17:06:40,Aug 20 2234 17:06:40,00:00:00,00:01:00,1
+
+Reading,Start Time,Duration,Max Time,Max(A AC),Average(A AC),Min Time,Min (A AC),Stop Time
+1,Aug 20 2234 17:06:40,00:01:00,Aug 20 2234 17:06:40,"0","0",Aug 20 2234 17:06:40,"0",Aug 21 2234 09:46:40
