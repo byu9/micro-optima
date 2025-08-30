@@ -8,3 +8,4 @@ statsmodels
 # xgboost bug workaround
 scikit-learn<1.6
 xgboost
+xgboost_distribution
