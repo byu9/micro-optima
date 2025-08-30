@@ -39,7 +39,7 @@ validate_model() {
 zones='
 nyiso-CAPITL nyiso-CENTRL nyiso-DUNWOD nyiso-GENESE nyiso-HUD_VL
 nyiso-LONGIL nyiso-MHK_VL nyiso-MILLWD nyiso-NORTH nyiso-NYC
-nyiso-WEST liege-load liege-pv
+nyiso-WEST liege-load liege-pv fluke-a fluke-b
 '
 
 run_task() {
