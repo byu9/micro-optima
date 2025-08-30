@@ -73,8 +73,8 @@ def _run_main():
     prediction = _load_prediction(args)
     target = _load_target(args)
 
-    plt.figure()
-    plt.scatter(target.index, target, label='target', marker='.', s=10, color='white')
+    plt.figure(figsize=(12, 6))
+    plt.scatter(target.index, target, label='target', marker='.', s=1, color='white')
     _plot_heatmap(prediction,
                   vlo=target['Target'].min(),
                   vhi=target['Target'].max(),
@@ -86,6 +86,7 @@ def _run_main():
     plt.xlabel('Observation Index')
     plt.xticks(rotation=45)
     plt.ylabel('Target')
+    plt.tight_layout()
 
     if args.save is None:
         plt.show()
