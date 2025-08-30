@@ -25,7 +25,7 @@ visualize_prediction() {
     --target datasets/id_test/target-$1.csv \
     --parse-dates \
     --title $zone \
-    --save results/id/test-$1.png
+    --save results/id/test-$1.pdf
 }
 
 validate_model() {
